@@ -6,11 +6,13 @@ import org.apache.spark.mllib.clustering.{KMeans, KMeansModel}
 import org.apache.spark.mllib.linalg.Vector
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
+import org.apache.spark.rdd.RDD
+
 
 object KmeansDemo extends java.io.Serializable {    
   def featurize(s: String): Vector = {
       val tf = new HashingTF(1000)
-      bigram = s.sliding(2).toSeq
+      val bigram = s.sliding(2).toSeq
       tf.transform(bigram)
     }
     

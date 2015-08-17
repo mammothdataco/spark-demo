@@ -13,8 +13,8 @@ object LogDemo extends java.io.Serializable {
     val sc = new SparkContext(conf)
     val log = sc.textFile("S3URL")
     val errors = log.filter(errorFilter(_))
-    val errorsByIP = errors.map((_.split(" ")(0)), 1L)
+    val errorsByIP = errors.map( x => (x.split(" ")(0), 1L))
     val errorsReduced = errorsByIP.reduceByKey( (x,y) => x + y ).cache
-    errorsByIP.sort().saveAsTextFile("errors")
+    errorsByIP.saveAsTextFile("errors")
   }
 }
